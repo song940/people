@@ -1,13 +1,12 @@
 import { ready } from 'https://lsong.org/scripts/dom.js';
-import { 
+import {
   h, render, useState,
+  useRouter, push, back,
   Link, Button,
 } from 'https://lsong.org/scripts/components/index.js';
 
 const Preview = () => {
-  return h('div', { className: 'cv-preview' }, [
-    "please upload CV files"
-  ])
+  return h('div', { className: 'cv-preview' }, [])
 };
 
 const EditorBasic = () => {
@@ -81,8 +80,9 @@ const EditorHeader = ({ title, children }) => {
 };
 
 const Editor = () => {
-  const [educations, setEducations] = useState([{}]);
   const [projects, setProjects] = useState([]);
+  const [educations, setEducations] = useState([{}]);
+  const [experiences, setExperiences] = useState([]);
   const addEducation = () => {
     educations.push({})
     setEducations([...educations]);
@@ -90,6 +90,10 @@ const Editor = () => {
   const addProject = () => {
     projects.push({});
     setProjects([...projects]);
+  };
+  const addExperience = () => {
+    experiences.push({});
+    setExperiences([...experiences]);
   };
   return h('form', { className: 'cv-editor form' }, [
     h(EditorHeader, { title: 'Basic' }),
@@ -99,35 +103,53 @@ const Editor = () => {
     ]),
     educations.map(education => h(EditorEducation, { education })),
     h(EditorHeader, { title: 'Work Experience' }, [
-      h(Link, { onClick: addEducation }, '+ Add')
+      h(Link, { onClick: addExperience }, '+ Add')
     ]),
-    h(EditorBasic),
+    experiences.map(experience => h(EditorEducation, { experience })),
     h(EditorHeader, { title: 'Projects' }, [
       h(Link, { onClick: addProject }, '+ Add')
     ]),
     projects.map(project => h(EditorProject, { project })),
-
   ]);
 };
 
-const App = () => {
+const New = () => {
   return [
     h('div', { className: 'cv-header' }, [
       h('h2', null, "New File"),
-      h('div', null, [
-        h(Button, { type: 'primary' }, 'Upload')
-      ])
+      h(Link, { onClick: back }, "Back")
     ]),
     h('div', { className: 'cv-main' }, [
       h(Preview),
       h(Editor),
     ]),
-    h('footer', {  }, [
+    h('footer', {}, [
       h(Button),
-      h(Button, { type: 'primary' }, "Submit"),
+      h('div', null, [
+        h(Button, { onClick: back }, "Back"),
+        h(Button, { type: 'primary' }, "Submit"),
+      ])
     ])
   ]
 }
+
+const Index = () => {
+  return h('div', null, [
+    h('h2', {}, "Index"),
+    h(Link, { onClick: () => push('/new') }, "New")
+  ]);
+};
+
+const routes = {
+  '/': () => h(Index),
+  '/new': () => h(New),
+}
+
+
+const App = () => {
+  const view = useRouter(routes);
+  return view;
+};
 
 ready(() => {
   const app = document.getElementById('app');

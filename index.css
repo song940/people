@@ -5,14 +5,8 @@
     max-width: 95%;
 }
 
-.cv-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .cv-main {
-    height: 80vh;
+    height: 75vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -44,7 +38,7 @@
 }
 
 .cv-editor-group:hover {
-    background-color: #fefefe;
+    background-color: rgba(233, 233, 233, 0.2);
 }
 
 footer {
