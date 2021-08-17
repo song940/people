@@ -1,0 +1,54 @@
+@import url(https://lsong.org/stylesheets/form.css);
+@import url(https://lsong.org/stylesheets/button.css);
+.container {
+    width: 100%;
+    max-width: 95%;
+}
+
+.cv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cv-main {
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cv-preview, .cv-editor {
+    flex: 1;
+    overflow: scroll;
+    border: 1px solid #ccc;
+}
+
+.form-field {
+    width: calc(50% - 20px);
+    display: inline-block;
+    margin: 10px;
+}
+
+.cv-editor-header {
+    display: flex;
+    margin: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+}
+
+.cv-editor-group+.cv-editor-group {
+    border-top: 1px solid #eee;
+}
+
+.cv-editor-group:hover {
+    background-color: #fefefe;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
